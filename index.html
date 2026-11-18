@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Lead Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Top bar: app title + total and per-stage counts (filled by app.js) -->
+  <header class="topbar">
+    <h1 class="brand">Mini Lead Tracker</h1>
+    <div class="stats" aria-live="polite">
+      <div class="stat stat-total">
+        <span class="stat-label">Total</span>
+        <span class="stat-value" id="count-total">0</span>
+      </div>
+      <div id="stage-stats" class="stage-stats"></div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- Lead form: used for both adding and editing a lead -->
+    <section class="panel form-panel" aria-labelledby="form-title">
+      <h2 id="form-title">Add a lead</h2>
+      <form id="lead-form" novalidate>
+        <input type="hidden" id="lead-id" />
+
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input id="name" name="name" type="text" maxlength="80" required autocomplete="off" />
+          <small class="error" data-error-for="name"></small>
+        </div>
+
+        <div class="field">
+          <label for="company">Company <span class="req">*</span></label>
+          <input id="company" name="company" type="text" maxlength="80" required autocomplete="off" />
+          <small class="error" data-error-for="company"></small>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" maxlength="25" placeholder="+1 555 123 4567" autocomplete="off" />
+          <small class="error" data-error-for="phone"></small>
+        </div>
+
+        <div class="field">
+          <label for="source">Source</label>
+          <select id="source" name="source">
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Website">Website</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="3" maxlength="500"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-btn">Add lead</button>
+          <button type="button" class="btn btn-ghost" id="cancel-btn" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Board: 5 stage columns, rendered by app.js -->
+    <section class="board" id="board" aria-label="Lead board"></section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
